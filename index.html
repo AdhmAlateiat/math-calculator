@@ -1,84 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Pythagorean Theorem Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="number"] {
-            width: 200px;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        #result {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h2>Pythagorean Theorem Calculator</h2>
-    <label for="sideA">Length of Side A:</label>
-    <input type="number" id="sideA" min="0" step="any">
-    <label for="sideB">Length of Side B:</label>
-    <input type="number" id="sideB" min="0" step="any">
-    <label for="sideC">Length of Side C:</label>
-    <input type="number" id="sideC" min="0" step="any">
-    <label for="selectSide">Calculate:</label>
-    <select id="selectSide">
-        <option value="sideA">Side A</option>
-        <option value="sideB">Side B</option>
-        <option value="sideC">Side C</option>
-    </select>
-    <button onclick="calculate()">Calculate</button>
-    <p id="result"></p>
-
-    <script>
-        function calculate() {
-            var sideA = parseFloat(document.getElementById('sideA').value);
-            var sideB = parseFloat(document.getElementById('sideB').value);
-            var sideC = parseFloat(document.getElementById('sideC').value);
-            var selectSide = document.getElementById('selectSide').value;
-
-            var result;
-
-            if (selectSide === 'sideA') {
-                if (!isNaN(sideB) && !isNaN(sideC)) {
-                    result = Math.sqrt(sideC**2 - sideB**2);
-                }
-            } else if (selectSide === 'sideB') {
-                if (!isNaN(sideA) && !isNaN(sideC)) {
-                    result = Math.sqrt(sideC**2 - sideA**2);
-                }
-            } else if (selectSide === 'sideC') {
-                if (!isNaN(sideA) && !isNaN(sideB)) {
-                    result = Math.sqrt(sideA**2 + sideB**2);
-                }
-            }
-
-            if (isNaN(result) || result < 0) {
-                document.getElementById('result').innerHTML = "Invalid side lengths. Triangle inequality violated.";
-            } else {
-                document.getElementById('result').innerHTML = "The length of " + selectSide + " is: " + result.toFixed(2);
-            }
-        }
-    </script>
-</body>
+  <head>
+     <link rel="stylesheet" href="Style.css">
+    <title>Emulator Time</title>
+  </head>
+  <body>
+    <div class="border-left">  
+        <li><a href="Pythagorean Theorem">Pythagorean Theorem</a></li>
+    </div>
+  </body>
 </html>
