@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Right Triangle Solver</title>
+    <script>
+        var svgNS = "http://www.w3.org/2000/svg";
+        var svg = null;
+
+        function isRightTriangle() {
+            var side1 = parseFloat(document.getElementById("side1").value);
+            var side2 = parseFloat(document.getElementById("side2").value);
+            var side3 = parseFloat(document.getElementById("side3").value);
+
+            var sides = [side1, side2, side3];
+            sides.sort();
+
+            if (Math.abs(Math.pow(sides[0], 2) + Math.pow(sides[1], 2) - Math.pow(sides[2], 2)) < 1e-10) {
+                document.getElementById("result").textContent = "The triangle with side lengths " + side1 + ", " + side2 + ", and " + side3 + " forms a right triangle.";
+                drawTriangle();
+            } else {
+                document.getElementById("result").textContent = "The triangle with side lengths " + side1 + ", " + side2 + ", and " + side3 + " does not form a right triangle.";
+                clearTriangle();
+            }
+        }
+
+        function drawTriangle() {
+            if (svg) {
+                clearTriangle();
+            }
+
+            svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("width", "200");
+            svg.setAttribute("height", "200");
+
+            var pointA = { x: 20, y: 180 };
+            var pointB = { x: 180, y: 180 };
+            var pointC = { x: 100, y: 20 };
+
+            var lineAB = document.createElementNS(svgNS, "line");
+            lineAB.setAttribute("x1", pointA.x);
+            lineAB.setAttribute("y1", pointA.y);
+            lineAB.setAttribute("x2", pointB.x);
+            lineAB.setAttribute("y2", pointB.y);
+            lineAB.setAttribute("stroke", "black");
+
+            var lineBC = document.createElementNS(svgNS, "line");
+            lineBC.setAttribute("x1", pointB.x);
+            lineBC.setAttribute("y1", pointB.y);
+            lineBC.setAttribute("x2", pointC.x);
+            lineBC.setAttribute("y2", pointC.y);
+            lineBC.setAttribute("stroke", "black");
+
+            var lineCA = document.createElementNS(svgNS, "line");
+            lineCA.setAttribute("x1", pointC.x);
+            lineCA.setAttribute("y1", pointC.y);
+            lineCA.setAttribute("x2", pointA.x);
+            lineCA.setAttribute("y2", pointA.y);
+            lineCA.setAttribute("stroke", "black");
+
+            svg.appendChild(lineAB);
+            svg.appendChild(lineBC);
+            svg.appendChild(lineCA);
+
+            document.getElementById("triangle").appendChild(svg);
+        }
+
+        function clearTriangle() {
+            if (svg) {
+                svg.remove();
+                svg = null;
+            }
+        }
+
+        function reset() {
+            document.getElementById("side1").value = "";
+            document.getElementById("side2").value = "";
+            document.getElementById("side3").value = "";
+            document.getElementById("result").textContent = "";
+            clearTriangle();
+        }
+    </script>
+</head>
+<body>
+    <h1>Right Triangle Solver</h1>
+    <p>Enter the lengths of the three sides of the triangle:</p>
+    <label for="side1">Side 1:</label>
+    <input type="number" id="side1" step="any" required>
+    <br>
+    <label for="side2">Side 2:</label>
+    <input type="number" id="side2" step="any" required>
+    <br>
+    <label for="side3">Side 3:</label>
+    <input type="number" id="side3" step="any" required>
+    <br>
+    <button onclick="isRightTriangle()">Check</button>
+    <button onclick="reset()">Reset</button>
+    <br>
+    <p id="result"></p>
+    <div id="triangle"></div>
+</body>
+</html>
